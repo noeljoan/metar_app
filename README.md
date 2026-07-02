@@ -231,5 +231,6 @@ Dieses Projekt kann frei für eigene Zwecke genutzt und angepasst werden.
 ---
 
 <div align="center">
-Made with 🐍 &nbsp;+&nbsp; ☁️ &nbsp;+&nbsp; ✈️
+Made with 🐍 &nbsp;+&nbsp; ☁️ &nbsp;+&nbsp; ✈️  &nbsp;+&nbsp; <BR>
+(c) Copyright 2026 - Noel Joan    
 </div>
