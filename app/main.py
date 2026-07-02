@@ -255,7 +255,7 @@ class METARViewer(tk.Tk):
         except Exception as e:
             messagebox.showerror("Online-Fehler", f"Live-Daten konnten nicht abgerufen werden:\n{str(e)}")
         finally:
-            self.title("METAR-Desktop")
+            self.title("METAR-Desktop - (c) 2026 - Noel Joan")
 
     def load_single_station(self):
         station_id = self.station_entry.get().strip().upper()
