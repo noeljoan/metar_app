@@ -51,7 +51,7 @@ voraus.
 ```
 ## 🛫 Screenshoot
 
-![metar_app])Screeenshot.png)
+![metar_app](Screeenshot.png)
 
 ## 🚀 Installation
 
