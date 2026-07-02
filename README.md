@@ -145,4 +145,5 @@ Dieses Projekt kann frei für eigene Zwecke genutzt und angepasst werden.
 
 <div align="center">
 Made with 🐍 &nbsp;+&nbsp; ☁️ &nbsp;+&nbsp; ✈️
+(c) 2026 - Noel Joan    
 </div>
