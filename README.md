@@ -51,7 +51,7 @@ voraus.
 ```
 ## 🛫 Screenshoot
 
-![Dashboard](screenshot.png)
+!(Screeenshot.png)
 
 ## 🚀 Installation
 
