@@ -37,16 +37,16 @@ voraus.
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  Datenquelle wählen                                           │
-│  [ZIP-Datei laden] | Land: [Deutschland ▾] [Live-Daten laden] │
-│                                    [Simulation] [KI trainieren]│
+│  Datenquelle wählen                                          │
+│  [ZIP-Datei laden] | Land: [Deutschland ▾] [Live-Daten laden]│
+│                                  [Simulation] [KI trainieren]│
 ├──────────────────────────────────────────────────────────────┤
-│  Einzelne Station live abrufen                                │
-│  Flughafen-ICAO (z.B. EDMA): [EDMA____] [Wetter laden]        │
+│  Einzelne Station live abrufen                               │
+│  Flughafen-ICAO (z.B. EDMA): [EDMA____] [Wetter laden]       │
 ├──────────────────────────────────────────────────────────────┤
-│  ┌ Daten-Tabelle ┐ ┌ Visualisierung ┐ ┌ KI-Vorhersage ┐       │
-│  │  Station-Tabelle mit Wind/Temp/Druck/Sicht          │      │
-│  └───────────────────────────────────────────────────  ┘      │
+│  ┌ Daten-Tabelle ┐ ┌ Visualisierung ┐ ┌ KI-Vorhersage ┐      │
+│  │  Station-Tabelle mit Wind/Temp/Druck/Sicht          │     │
+│  └───────────────────────────────────────────────────  ┘     │
 └──────────────────────────────────────────────────────────────┘
 ```
 
