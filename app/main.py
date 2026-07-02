@@ -40,14 +40,28 @@ except ImportError:
         station = parts[1] if len(parts) > 1 else "UNKN"
         return {
             "station": station, "time": datetime.now().strftime("%H:%M"),
-            "wind": "12 KT", "temp": 15.0, "pressure": 1013.0, "visibility": 9999.0
+            "wind": "12 KT", "temp": 15.0, "pressure": 1013.0, "visibility": 9999.0,
+            "clouds": "keine Angabe", "trend": "", "remarks": "",
         }
 
 
 class METARViewer(tk.Tk):
+    # Spalten der Daten-Tabelle inkl. individueller Breite
+    TABLE_COLUMNS = {
+        "station": 90,
+        "time": 70,
+        "wind": 90,
+        "temp": 70,
+        "pressure": 80,
+        "visibility": 90,
+        "clouds": 160,
+        "trend": 70,
+        "remarks": 260,
+    }
+
     def __init__(self):
         super().__init__()
-        self.title("METAR-Desktop")
+        self.title("METAR-Desktop V1.2 - (c) 2026 Noel Joan ")
         self.geometry("1200x900")
 
         self.data = []
@@ -129,18 +143,23 @@ class METARViewer(tk.Tk):
 
         self.tree = ttk.Treeview(
             self.table_frame,
-            columns=("station", "time", "wind", "temp", "pressure", "visibility"),
+            columns=tuple(self.TABLE_COLUMNS.keys()),
             show="headings",
         )
-        for col in ("station", "time", "wind", "temp", "pressure", "visibility"):
+        for col, width in self.TABLE_COLUMNS.items():
             self.tree.heading(col, text=col.title())
-            self.tree.column(col, width=120, anchor="center")
+            anchor = "w" if col == "remarks" else "center"
+            self.tree.column(col, width=width, anchor=anchor)
 
         v_scroll = ttk.Scrollbar(self.table_frame, orient="vertical", command=self.tree.yview)
-        self.tree.configure(yscrollcommand=v_scroll.set)
+        h_scroll = ttk.Scrollbar(self.table_frame, orient="horizontal", command=self.tree.xview)
+        self.tree.configure(yscrollcommand=v_scroll.set, xscrollcommand=h_scroll.set)
 
-        self.tree.pack(fill="both", expand=True, side="left")
-        v_scroll.pack(fill="y", side="right")
+        self.tree.grid(row=0, column=0, sticky="nsew")
+        v_scroll.grid(row=0, column=1, sticky="ns")
+        h_scroll.grid(row=1, column=0, sticky="ew")
+        self.table_frame.grid_rowconfigure(0, weight=1)
+        self.table_frame.grid_columnconfigure(0, weight=1)
 
         # TAB 2: Visualisierung (Matplotlib)
         self.chart_frame = ttk.Frame(self.notebook)
@@ -195,10 +214,7 @@ class METARViewer(tk.Tk):
 
             self.tree.insert(
                 "", "end",
-                values=(
-                    data_dict["station"], data_dict["time"], data_dict["wind"],
-                    data_dict["temp"], data_dict["pressure"], data_dict["visibility"],
-                ),
+                values=tuple(data_dict.get(col, "") for col in self.TABLE_COLUMNS),
             )
 
         self.update_charts()
@@ -299,6 +315,7 @@ class METARViewer(tk.Tk):
     def run_realtime_simulation(self):
         # Simuliert eingehende Live-Wetterdaten im Sekundentakt
         station_names = ["EDDF", "EDDM", "EDDH", "EDDL"]
+        cloud_options = ["CAVOK", "FEW030", "SCT025", "BKN020CB", "OVC080", "SKC"]
         while self.simulation_running:
             mock_dict = {
                 "station": np.random.choice(station_names),
@@ -307,13 +324,16 @@ class METARViewer(tk.Tk):
                 "temp": round(np.random.uniform(5, 25), 1),
                 "pressure": round(np.random.uniform(990, 1030), 1),
                 "visibility": float(np.random.choice([9999, 5000, 3000, 800])),
+                "clouds": np.random.choice(cloud_options),
+                "trend": np.random.choice(["", "", "NOSIG"]),
+                "remarks": "",
             }
             self.data.append(mock_dict)
 
             # UI-Änderungen sicher aus dem Thread übergeben
             self.after(0, lambda d=mock_dict: self.tree.insert(
                 "", 0,
-                values=(d["station"], d["time"], d["wind"], d["temp"], d["pressure"], d["visibility"]),
+                values=tuple(d.get(col, "") for col in self.TABLE_COLUMNS),
             ))
             self.after(0, self.update_charts)
             time.sleep(1.5)
