@@ -229,7 +229,8 @@ Build behalten werden, dann geht ein erneuter Build etwas schneller).
 
 ## 📝 Lizenz
 
-Dieses Projekt kann frei für eigene Zwecke genutzt und angepasst werden.
+Dieses Projekt kann frei für eigene Zwecke genutzt und angepasst werden, Dieses Projekt
+ist unter der MIT-Lizenz lizenziert. Siehe die [LICENSE](LICENSE)-Datei für Details.
 
 ---
 
